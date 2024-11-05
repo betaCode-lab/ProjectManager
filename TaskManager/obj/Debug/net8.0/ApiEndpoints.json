@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "TaskManager.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "TaskManager.DTOs.Users.Login",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "TaskManager.Controllers.AuthController",
+    "Method": "SignUp",
+    "RelativePath": "api/Auth/SignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "TaskManager.DTOs.Users.UserInsertDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
