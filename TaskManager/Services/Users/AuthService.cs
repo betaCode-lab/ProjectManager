@@ -30,34 +30,40 @@ namespace TaskManager.Services.Users
 
         public string Login(Login login)
         {
-            var user = _userRepository.Search(u => u.Email.ToLower() == login.Email.ToLower()).FirstOrDefault();
-
-            if (user == null)
+            try
             {
-                Errors.Add("This user was not found.");
+                var user = _userRepository.Search(u => u.Email.ToLower() == login.Email.ToLower()).FirstOrDefault();
+
+                if (user == null)
+                {
+                    Errors.Add("This user was not found.");
+                    return "";
+                }
+
+                if (!BCrypt.Net.BCrypt.Verify(login.Password, user.Password))
+                {
+                    Errors.Add("Incorrect password.");
+                    return "";
+                }
+
+                var userDto = _mapper.Map<UserDto>(user);
+
+                var token = _tokenService.GenerateAccessToken(userDto);
+                string tokenString = _tokenService.WriteToken(token);
+
+                return tokenString;
+            }
+            catch
+            {
+                Errors.Add("An error was ocurred while login");
                 return "";
             }
-
-            if(!BCrypt.Net.BCrypt.Verify(login.Password, user.Password))
-            {
-                Errors.Add("Incorrect password.");
-                return "";
-            }
-
-            var userDto = _mapper.Map<UserDto>(user);
-
-            var token = _tokenService.GenerateAccessToken(userDto);
-            string tokenString = _tokenService.WriteToken(token);
-
-            return tokenString;
         }
 
         public async Task<bool> Add(UserInsertDto userInsertDto)
         {
             try
             {
-                var userFound = _userRepository.Search(u => u.Email.ToLower() == userInsertDto.Email.ToLower()).FirstOrDefault();
-
                 if (_userRepository.Search(u => u.Username == userInsertDto.Username).FirstOrDefault() != null)
                 {
                     Errors.Add("This username is already in use.");
@@ -87,7 +93,7 @@ namespace TaskManager.Services.Users
             }
             catch
             {
-                Errors.Add("An error was ocurred during register.");
+                Errors.Add("An error was ocurred while register.");
                 return false;
             }
         }

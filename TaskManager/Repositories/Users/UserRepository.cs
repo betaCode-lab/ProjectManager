@@ -4,7 +4,7 @@ using TaskManager.Models;
 using TaskManager.Models.Core;
 using TaskManager.Repositories.Core.Interfaces;
 
-namespace TaskManager.Repositories
+namespace TaskManager.Repositories.Users
 {
     public class UserRepository : IGenericRepository<User>
     {

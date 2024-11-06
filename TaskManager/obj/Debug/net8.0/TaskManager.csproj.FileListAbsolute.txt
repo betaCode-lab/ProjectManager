@@ -143,3 +143,4 @@ C:\Users\adria\source\repos\TaskManager\TaskManager\obj\Debug\net8.0\TaskManager
 C:\Users\adria\source\repos\TaskManager\TaskManager\obj\Debug\net8.0\ref\TaskManager.dll
 C:\Users\adria\source\repos\TaskManager\TaskManager\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\adria\source\repos\TaskManager\TaskManager\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\adria\source\repos\TaskManager\TaskManager\obj\Debug\net8.0\TaskManager.sourcelink.json

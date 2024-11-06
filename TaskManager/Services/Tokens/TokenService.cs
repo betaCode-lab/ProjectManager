@@ -20,6 +20,7 @@ namespace TaskManager.Services.Tokens
         {
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, userDto.Id.ToString()),
                 new Claim(ClaimTypes.Name, userDto.Firstname),
                 new Claim(ClaimTypes.Email, userDto.Email)
             };
