@@ -1,17 +1,20 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager.AutoMappers;
 using TaskManager.DTOs.Projects;
+using TaskManager.DTOs.Tasks;
 using TaskManager.Models;
 using TaskManager.Models.Core;
 using TaskManager.Repositories.Core.Interfaces;
 using TaskManager.Repositories.Projects;
+using TaskManager.Repositories.Tasks;
 using TaskManager.Repositories.Users;
 using TaskManager.Services.Projects;
 using TaskManager.Services.Projects.Interfaces;
+using TaskManager.Services.Tasks;
+using TaskManager.Services.Tasks.Interfaces;
 using TaskManager.Services.Tokens;
 using TaskManager.Services.Tokens.Interface;
 using TaskManager.Services.Users;
@@ -25,6 +28,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProjectService<ProjectDto, ProjectInsertDto, ProjectUpdateDto>, ProjectService>();
+builder.Services.AddScoped<IProjectTaskService<ProjectTaskDto, ProjectTaskInsertDto, ProjectTaskUpdateDto>, ProjectTaskService>();
+
 
 // Entity Framework
 builder.Services.AddDbContext<ProjectManagerContext>(options =>
@@ -34,6 +39,7 @@ builder.Services.AddDbContext<ProjectManagerContext>(options =>
 
 builder.Services.AddScoped<IGenericRepository<User>, UserRepository>();
 builder.Services.AddScoped<IGenericRepository<Project>, ProjectRepository>();
+builder.Services.AddScoped<IGenericRepository<ProjectTask>, ProjectTaskRepository>();
 
 // Mappers
 builder.Services.AddAutoMapper(typeof(MappingConfiguration));

@@ -46,7 +46,7 @@ namespace TaskManager.Controllers
                 return BadRequest(_authService.Errors);
             }
 
-            return Ok();
+            return Created();
         }
     }
 }
